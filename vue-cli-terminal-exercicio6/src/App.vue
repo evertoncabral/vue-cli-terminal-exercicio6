@@ -1,19 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <input type="text" v-model="text" />
+    <br />
+    <span>Text: {{ text }}</span> 
+    <br />
+    <span>API: {{ apiResponse }}</span>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+
+<script>
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      apiResponse: "Start",
+      text: 123,
+    };
+  },
+  methods: {
+    // simulateAPI(response) {
+    //   return new Promise((res) => {
+    //     setTimeout(() => {
+    //       this.apiResponse = response;
+    //     }, 1000);
+    //   });
+    // },
+    async fetchAPI(value) {
+      await this.simulateAPI(value);
+    },
+  },
+};
 </script>
 
 <style>
