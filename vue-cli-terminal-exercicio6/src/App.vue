@@ -2,13 +2,11 @@
   <div id="app">
     <input type="text" v-model="text" />
     <br />
-    <span>Text: {{ text }}</span> 
+    <span>Text: {{ text }}</span>
     <br />
     <span>API: {{ apiResponse }}</span>
   </div>
 </template>
-
-
 
 <script>
 export default {
@@ -16,20 +14,28 @@ export default {
   data() {
     return {
       apiResponse: "Start",
-      text: 123,
+      text: "",
     };
   },
   methods: {
-    // simulateAPI(response) {
-    //   return new Promise((res) => {
-    //     setTimeout(() => {
-    //       this.apiResponse = response;
-    //     }, 1000);
-    //   });
-    // },
-    async fetchAPI(value) {
-      await this.simulateAPI(value);
+    simulateApi(response) {
+      return new Promise((res) => {
+        setTimeout(() => {
+          this.apiResponse = response;
+        }, 1000);
+      });
     },
+    async fetchApi(value) {
+      await this.simulateApi(value);
+    },
+    callApi(newValue, oldValue) {
+      if (newValue.lenght > 7) {
+        this.fetchApi(Math.random());
+      }
+    },
+  },
+  watch: {
+    text: "callApi",
   },
 };
 </script>
